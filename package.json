@@ -1,0 +1,31 @@
+{
+  "name": "atrasos-api",
+  "version": "1.0.0",
+  "description": "A simple but useful api to register delays",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest",
+    "test-cov": "jest --coverage --runInBand --forceExit",
+    "authors": "git log --format='%aN <%aE>' | sort -u > AUTHORS"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhentomPT/atrasos-api.git"
+  },
+  "author": "PhentomPT",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PhentomPT/atrasos-api/issues"
+  },
+  "homepage": "https://github.com/PhentomPT/atrasos-api#readme",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "mongoose": "^5.4.13"
+  },
+  "devDependencies": {
+    "jest": "^24.1.0",
+    "nodemon": "^1.18.10"
+  }
+}
