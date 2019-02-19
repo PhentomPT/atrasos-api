@@ -1,15 +1,34 @@
 const mongoose = require('mongoose');
+const delaysCache = require('flat-cache').load('deloys-store');
 const env = require('../../environment');
+
 const Delay = require('../../models/delay');
 
 module.exports = async (ctx, next) => {
     let response = {};
     try {
       await mongoose.connect(env.DB_CONNECTION, {useNewUrlParser: true});
-      const delay = new Delay(ctx.request.body);
+      const delay = new Delay({
+        company: ctx.request.body.company,
+        delay: ctx.request.body.delay,
+        line: ctx.request.body.line,
+        direction: ctx.request.body.direction,
+        status: ctx.request.body.status,
+      });
   
-      await delay.save();
-      await mongoose.disconnect();
+      
+      const delayDoc = await delay.save();
+
+      let delays = delaysCache.getKey('delays');
+
+      if (!delays) {
+        delays = [];
+      }
+      
+      delays.push(delayDoc);
+      delaysCache.setKey('delays', delays);
+
+      mongoose.disconnect();
   
       return ctx.body = JSON.stringify({status: 200, message: 'Delay registered'});
     } catch (error) {

@@ -1,10 +1,13 @@
 const Koa = require('koa');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
+const cache = require('flat-cache');
 const env = require('./environment');
 
 const app = new Koa();
 const router = new Router();
+
+cache.clearAll();
 
 router.get('/', require('./controllers/home'));
 router.get('/delays', require('./controllers/delays/get'));
