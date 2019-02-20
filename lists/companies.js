@@ -1,3 +1,3 @@
 module.exports = [
-    'CP', 'METRO', 'CARRIS', 'FERTAGUS',
-]
+  'CP', 'METRO', 'CARRIS', 'FERTAGUS',
+];

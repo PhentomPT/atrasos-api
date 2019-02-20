@@ -1,3 +1,3 @@
 module.exports = [
-    'ACTIVE', 'INACTIVE'
+  'ACTIVE', 'INACTIVE',
 ];
