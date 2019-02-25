@@ -1,14 +1,14 @@
 const Koa = require('koa');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
-const cache = require('flat-cache');
-const logger = require('./helpers/logger');
+const cache = require('memory-cache');
 const env = require('./environment');
+const logger = require('./helpers/logger');
 
 const app = new Koa();
 const router = new Router();
 
-cache.clearAll();
+cache.clear();
 
 router.get('/', require('./controllers/home'));
 router.get('/delays', require('./controllers/delays/get'));
@@ -26,7 +26,14 @@ app
   .use(async (ctx) => {
     ctx.status = 404;
     ctx.body = JSON.stringify({ message: '404: Not Found...' });
-  })
-  .listen(env.PORT);
+  });
 
-logger.info(`API on port: ${env.PORT}`);
+const server = app
+  .listen(env.PORT, () => {
+    logger.info(`API on port: ${env.PORT}`);
+  })
+  .on('error', (err) => {
+    logger.error(`Server did not start. Error: ${err}`);
+  });
+
+module.exports = server;

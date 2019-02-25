@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const delaysCache = require('flat-cache').load('delays-store', './.cache');
+const cache = require('memory-cache');
 
 const logger = require('../../helpers/logger');
 const env = require('../../environment');
@@ -21,15 +21,14 @@ module.exports = async (ctx) => {
 
     const delayDoc = await delay.save();
 
-    let delays = delaysCache.getKey('delays');
+    let delays = cache.get('delays');
 
     if (!delays) {
       delays = [];
     }
 
     delays.push(delayDoc);
-    delaysCache.setKey('delays', delays);
-    delaysCache.save();
+    cache.put('delays', delays);
 
     mongoose.disconnect();
 

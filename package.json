@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest",
+    "test": "jest --forceExit",
     "test-cov": "jest --coverage --runInBand --forceExit",
     "lint": "eslint ./ --fix",
     "authors": "git log --format='%aN <%aE>' | sort -u > AUTHORS"
@@ -22,10 +22,10 @@
   },
   "homepage": "https://github.com/PhentomPT/atrasos-api#readme",
   "dependencies": {
-    "flat-cache": "^2.0.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "memory-cache": "^0.2.0",
     "mongoose": "^5.4.13",
     "winston": "^3.2.1"
   },
@@ -34,6 +34,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "jest": "^24.1.0",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "supertest": "^3.4.2"
   }
 }
